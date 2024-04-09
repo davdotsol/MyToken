@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+// SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.24;
 
 // TokenModule#Token - Sepolia - 0xd848E655EC68150114f9f5b9aD1a6a73c087ff9A
