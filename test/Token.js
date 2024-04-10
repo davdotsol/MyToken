@@ -28,10 +28,8 @@ describe('Token contract', function () {
     // Get the Signers here.
     const [owner, addr1, addr2] = await ethers.getSigners();
 
-    // To deploy our contract, we just have to call ethers.deployContract and await
-    // its waitForDeployment() method, which happens once its transaction has been
-    // mined.
-    const ddsToken = await ethers.deployContract('Token');
+    const Token = await ethers.getContractFactory('Token');
+    const ddsToken = await Token.deploy('Dapp Dot Sol', 'DDS', 1000000);
 
     await ddsToken.waitForDeployment();
 
@@ -44,20 +42,6 @@ describe('Token contract', function () {
     // `it` is another Mocha function. This is the one you use to define each
     // of your tests. It receives the test name, and a callback function.
     //
-    // If the callback function is async, Mocha will `await` it.
-    it('Should set the right owner', async function () {
-      // We use loadFixture to setup our environment, and then assert that
-      // things went well
-      const { ddsToken, owner } = await loadFixture(deployTokenFixture);
-
-      // `expect` receives a value and wraps it in an assertion object. These
-      // objects have a lot of utility methods to assert values.
-
-      // This test expects the owner variable stored in the contract to be
-      // equal to our Signer's owner.
-      expect(await ddsToken.owner()).to.equal(owner.address);
-    });
-
     it('Should assign the total supply of tokens to the owner', async function () {
       const { ddsToken, owner } = await loadFixture(deployTokenFixture);
       const ownerBalance = await ddsToken.balanceOf(owner.address);

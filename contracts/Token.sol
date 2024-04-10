@@ -2,17 +2,19 @@
 pragma solidity 0.8.24;
 
 // TokenModule#Token - Sepolia - 0xd848E655EC68150114f9f5b9aD1a6a73c087ff9A
+// TokenModule#Token - Sepolia - 0x3695C4Ae1B36d41DDc2BeE55BaA7c4e18cDd1437
 
 import "hardhat/console.sol";
 
 contract Token {
-    string public name = "Dapp Dot Sol";
-    string public symbol = "DDS";
+    string public name;
+    string public symbol;
+    uint256 public decimals = 18;
 
     // The fixed amount of tokens, stored in an unsigned integer type variable.
-    uint256 public totalSupply = 1000000;
+    uint256 public totalSupply;
 
-    address public owner;
+    address owner;
 
     mapping(address => uint256) balances;
 
@@ -26,7 +28,14 @@ contract Token {
         uint256 _value
     );
 
-    constructor() {
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        uint256 _totalSupply
+    ) {
+        name = _name;
+        symbol = _symbol;
+        totalSupply = _totalSupply * (10 ** decimals);
         balances[msg.sender] = totalSupply;
         owner = msg.sender;
     }

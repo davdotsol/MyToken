@@ -1,7 +1,10 @@
 const { buildModule } = require('@nomicfoundation/hardhat-ignition/modules');
 
 const TokenModule = buildModule('TokenModule', (m) => {
-  const token = m.contract('Token');
+  const name = m.getParameter('name', 'Dapp Dot Sol');
+  const symbol = m.getParameter('symbol', 'DDS');
+  const totalSupply = m.getParameter('totalSupply', 1000000);
+  const token = m.contract('Token', [name, symbol, totalSupply]);
 
   return { token };
 });
