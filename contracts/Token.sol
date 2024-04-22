@@ -72,14 +72,13 @@ contract Token {
         address _to,
         uint256 _value
     ) external returns (bool success) {
-        require(_value <= balances[_from]);
         require(_value <= allowedSpenders[_from][msg.sender]);
+
+        _transfer(_from, _to, _value);
 
         allowedSpenders[_from][msg.sender] = allowedSpenders[_from][
             msg.sender
         ] -= _value;
-
-        _transfer(_from, _to, _value);
 
         return true;
     }
